@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.Lesson4.Entities.Product;
-import ru.geekbrains.Lesson4.Entities.ProductRepository;
+import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
 
 @Controller
 @RequestMapping("/products")
