@@ -29,10 +29,12 @@ public class ProductRepository extends Perository<Product> {
     public Product getProductById(int id) {
         return entityManager.find(Product.class, id);
     }
+
     @Transactional
     public void addProduct(Product product) {
         entityManager.persist(product);
     }
+
     @Transactional
     public void deleteProduct(Product product) {
         entityManager.remove(product);

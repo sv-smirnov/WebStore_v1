@@ -3,7 +3,7 @@ package ru.geekbrains.Lesson4.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "names")
+@Table(name = "names", schema = "product")
 public class Product {
 
     @Id
@@ -14,7 +14,8 @@ public class Product {
     @Column
     private double cost;
 
-    public Product(){}
+    public Product() {
+    }
 
     public Product(int id, String name, double cost) {
         this.id = id;
