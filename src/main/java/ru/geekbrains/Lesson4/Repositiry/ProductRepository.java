@@ -32,7 +32,7 @@ public class ProductRepository extends Perository<Product> {
 
     @Transactional
     public void addProduct(Product product) {
-        entityManager.persist(product);
+        entityManager.merge(product);
     }
 
     @Transactional
