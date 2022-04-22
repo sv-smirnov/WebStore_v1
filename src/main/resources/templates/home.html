@@ -4,8 +4,23 @@
     <title>Home</title>
 </head>
 <body>
-<h1>All products</h1>
-<p th:each="product : ${products}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"/>
-<a type="button"  th:href="@{/products/new}">Add product</a>
+<form action="/products/toCart" method="get">
+    <h1>All products</h1>
+    <ul>
+        <th:block th:each="product : ${products}">
+            <p><input type="checkbox" name="id" th:value="${product.id}"
+                      th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"></p>
+        </th:block>
+    </ul>
+    <p>
+        <button type="submit">Add to cart</button>
+    </p>
+    <p>
+        <button type="button" onclick="location.href='/cart'">Go to cart</button>
+    </p>
+    <p>
+        <button type="button" onclick="location.href='/products/new'">Add new product</button>
+    </p>
+    <form/>
 </body>
 </html>

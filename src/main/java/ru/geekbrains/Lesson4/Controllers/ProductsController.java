@@ -4,15 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.Lesson4.Entities.Product;
+import ru.geekbrains.Lesson4.Repositiry.CartRepository;
 import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/products")
 public class ProductsController {
     ProductRepository productRepository;
+    CartRepository cartRepository;
 
-    public ProductsController(ProductRepository productRepository) {
+    public ProductsController(ProductRepository productRepository, CartRepository cartRepository) {
         this.productRepository = productRepository;
+        this.cartRepository = cartRepository;
     }
 
     @GetMapping
@@ -31,5 +36,15 @@ public class ProductsController {
         productRepository.addProduct(new Product(id, name, cost));
         return "redirect:/products";
     }
+
+    @RequestMapping(value = "/toCart", method = RequestMethod.GET)
+    public String toCart(@RequestParam List<Integer> id) {
+        for (int i = 0; i < id.size(); i++) {
+            cartRepository.addToCart(productRepository.getProductById(id.get(i)));
+        }
+        return "redirect:/products";
+    }
+
+
 }
 

@@ -1,10 +1,7 @@
 package ru.geekbrains.Lesson4.Repositiry;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.Lesson4.Entities.Product;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
