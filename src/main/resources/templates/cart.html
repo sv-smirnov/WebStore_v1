@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Cart</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
 </head>
 <body>
-<h1>Cart</h1>
-<p th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"/>
+<h1 class="top-info-heading">Cart</h1>
+<p class="product product-description" th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"/>
 
 <p>
   <button type="button" onclick="location.href='/cart/delete'">Clear cart</button>

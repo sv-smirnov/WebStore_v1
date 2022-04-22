@@ -1,0 +1,31 @@
+.product-box{
+              display: flex;
+              justify-content: space-between;
+}
+.product{
+              box-sizing: border-box;
+              background: #FFFFFF;
+              border-radius: 10px;
+              border: #000000;
+              border-style: groove;
+              display: flex;
+              flex-direction: row;
+              padding-top: 20px;
+              padding-bottom: 20px;
+}
+.top-info-heading {
+              font-size: 32px;
+              color: #1F3F68;
+              width: 510px;
+              font-weight: 300;
+              line-height: 74px;
+              letter-spacing: 0.04em;
+              margin-bottom: 32px;
+}
+.product-description{
+              font-size: 20px;
+              line-height: 30px;
+              color: #1F3F68;
+              letter-spacing: 0.05em;
+              margin-bottom: 14px;
+}

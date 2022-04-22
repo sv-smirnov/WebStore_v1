@@ -38,10 +38,11 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/toCart", method = RequestMethod.GET)
-    public String toCart(@RequestParam List<Integer> id) {
+    public String toCart(@RequestParam(required = false) List<Integer> id) {
+        if (id != null){
         for (int i = 0; i < id.size(); i++) {
             cartRepository.addToCart(productRepository.getProductById(id.get(i)));
-        }
+        }}
         return "redirect:/products";
     }
 

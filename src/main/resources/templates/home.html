@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
     <title>Home</title>
 </head>
 <body>
 <form action="/products/toCart" method="get">
-    <h1>All products</h1>
-    <ul>
+    <h1 class="top-info-heading">All products</h1>
+    <div class="product-box"><ul>
         <th:block th:each="product : ${products}">
-            <p><input type="checkbox" name="id" th:value="${product.id}"
-                      th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"></p>
+            <div class="product product-description"><input type="checkbox" name="id" th:value="${product.id}"
+                      th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"></div>
         </th:block>
-    </ul>
+    </ul></div>
     <p>
         <button type="submit">Add to cart</button>
     </p>
