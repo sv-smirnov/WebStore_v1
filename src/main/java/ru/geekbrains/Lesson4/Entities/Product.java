@@ -1,6 +1,7 @@
 package ru.geekbrains.Lesson4.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "names", schema = "product")
@@ -9,10 +10,20 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column
+
+    @Column(name = "name")
     private String name;
-    @Column
+
+    @Column(name = "cost")
     private double cost;
+
+    @ManyToMany
+    @JoinTable(
+            name = "orders",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id")
+    )
+    private List<Customer> customers;
 
     public Product() {
     }
