@@ -25,6 +25,7 @@ public class CustomersController {
     @RequestMapping(value = "/customers/showInfo", method = RequestMethod.GET)
     public String showCustomerInfo(@RequestParam(required = false) Integer id, Model uiModel) {
         uiModel.addAttribute("products", customerRepository.getById(id).getProducts());
+
         return "home";
     }
 

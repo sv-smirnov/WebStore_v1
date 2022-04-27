@@ -15,7 +15,7 @@ public class Customer {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "orders",
             joinColumns = @JoinColumn(name = "customer_id"),

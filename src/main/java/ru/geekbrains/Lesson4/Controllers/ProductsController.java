@@ -47,6 +47,16 @@ public class ProductsController {
         System.out.println(cartRepository.getCart());
         return "redirect:/products";
     }
+    @RequestMapping(value = "/products/delete", method = RequestMethod.GET)
+    public String deleteProduts(@RequestParam(required = false) List<Integer> id) {
+        if (id != null) {
+            for (int i = 0; i < id.size(); i++) {
+                productRepository.deleteById(id.get(i));
+            }
+        }
+
+        return "redirect:/products";
+    }
 
 }
 

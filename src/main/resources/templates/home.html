@@ -6,7 +6,7 @@
     <title>Home</title>
 </head>
 <body>
-<form action="/products/toCart" method="get">
+<form name="product_form" action="/products/toCart" method="get">
     <h1 class="top-info-heading">All products</h1>
     <div class="product-box"><ul>
         <th:block th:each="product : ${products}">
@@ -22,6 +22,9 @@
     </p>
     <p>
         <button type="button" onclick="location.href='/products/new'">Add new product</button>
+    </p>
+    <p>
+        <button type="submit" onclick="product_form.action = '/products/delete'">Delete products</button>
     </p>
     <form/>
 </body>

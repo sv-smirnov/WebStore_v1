@@ -27,4 +27,5 @@ public class CartController {
         cartRepository.deleteFromCart();
         return "redirect:/cart";
     }
+
 }
