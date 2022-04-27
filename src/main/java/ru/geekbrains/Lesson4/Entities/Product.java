@@ -1,6 +1,7 @@
 package ru.geekbrains.Lesson4.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
-    private List<Customer> customers;
+    private List<Customer> customers = new ArrayList<>();
 
     public Product() {
     }

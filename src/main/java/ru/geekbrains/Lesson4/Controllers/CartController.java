@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.geekbrains.Lesson4.Repositiry.CartRepository;
 
 @Controller
-@RequestMapping("/cart")
 public class CartController {
     CartRepository cartRepository;
 
@@ -16,17 +15,16 @@ public class CartController {
         this.cartRepository = cartRepository;
     }
 
-    @GetMapping
+    @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showAllProducts(Model uiModel) {
         uiModel.addAttribute("cart", cartRepository.getCart());
+        System.out.println(cartRepository.getCart());
         return "cart";
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/cart/delete", method = RequestMethod.GET)
     public String deleteFromCart() {
         cartRepository.deleteFromCart();
         return "redirect:/cart";
     }
-
-
-
 }

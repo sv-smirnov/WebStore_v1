@@ -5,47 +5,48 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.Lesson4.Entities.Product;
 import ru.geekbrains.Lesson4.Repositiry.CartRepository;
+import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
 import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/products")
 public class ProductsController {
     ProductRepository productRepository;
     CartRepository cartRepository;
 
-    public ProductsController(ProductRepository productRepository, CartRepository cartRepository) {
+    public ProductsController(ProductRepository productRepository, CartRepository cartRepository, CustomerRepository customerRepository) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
     }
 
-    @GetMapping
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String showAllProducts(Model uiModel) {
-        uiModel.addAttribute("products", productRepository.getProducts());
+        uiModel.addAttribute("products", productRepository.findAll());
         return "home";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/products/new")
     public String newProduct() {
         return "newProduct";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/add", method = RequestMethod.GET)
     public String getForm(@RequestParam Integer id, @RequestParam String name, @RequestParam Double cost) {
-        productRepository.addProduct(new Product(id, name, cost));
+        productRepository.save(new Product(id, name, cost));
         return "redirect:/products";
     }
 
-    @RequestMapping(value = "/toCart", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/toCart", method = RequestMethod.GET)
     public String toCart(@RequestParam(required = false) List<Integer> id) {
-        if (id != null){
-        for (int i = 0; i < id.size(); i++) {
-            cartRepository.addToCart(productRepository.getProductById(id.get(i)));
-        }}
+        if (id != null) {
+            for (int i = 0; i < id.size(); i++) {
+                cartRepository.addToCart(productRepository.getById(id.get(i)));
+            }
+        }
+        System.out.println(cartRepository.getCart());
         return "redirect:/products";
     }
-
 
 }
 

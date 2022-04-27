@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
+    <title>Customers</title>
+</head>
+<body>
+<form action="/customers/showInfo" method="get">
+    <h1 class="top-info-heading">All customers</h1>
+    <div class="product-box"><ul>
+        <th:block th:each="customer : ${customers}">
+            <div class="product product-description"><input type="radio" name="id" th:value="${customer.id}"
+                                                            th:text="'| #' + ${customer.id} + ' | ' + ${customer.name} +  ' | '"></div>
+        </th:block>
+    </ul></div>
+    <p>
+        <button type="submit">Show purchases</button>
+    </p>
+    <p>
+        <button type="button" onclick="location.href='/products'">Return to products</button>
+    </p>
+    <form/>
+</body>
+</html>

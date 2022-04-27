@@ -1,16 +1,17 @@
 package ru.geekbrains.Lesson4.Repositiry;
 
-import org.aspectj.apache.bcel.Repository;
 import ru.geekbrains.Lesson4.Entities.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
 @org.springframework.stereotype.Repository
-public class CartRepository extends Repository {
-    ArrayList<Product> cart = new ArrayList<Product>();
+public class CartRepository {
+    ArrayList<Product> cart;
 
     public CartRepository() {
-        this.cart = cart;
+        cart = new ArrayList<Product>();
     }
 
     public List<Product> getCart() {
