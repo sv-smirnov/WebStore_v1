@@ -1,7 +1,6 @@
 package ru.geekbrains.Lesson4.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,13 +17,8 @@ public class Product {
     @Column(name = "cost")
     private double cost;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "orders",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id")
-    )
-    private List<Customer> customers = new ArrayList<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orders;
 
     public Product() {
     }
@@ -46,4 +40,9 @@ public class Product {
     public double getCost() {
         return cost;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
 }

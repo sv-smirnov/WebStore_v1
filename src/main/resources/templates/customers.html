@@ -11,7 +11,7 @@
     <div class="product-box"><ul>
         <th:block th:each="customer : ${customers}">
             <div class="product product-description"><input type="radio" name="id" th:value="${customer.id}"
-                                                            th:text="'| #' + ${customer.id} + ' | ' + ${customer.name} +  ' | '"></div>
+                                                            th:text="'| #' + ${customer.id} + ' | ' + ${customer.name} "></div>
         </th:block>
     </ul></div>
     <p>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
+
+<head>
+    <title>Online store</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
+</head>
+<body>
+<form action="/auth" method="get">
+    <h1 class="top-info-heading">Welcome to online store!</h1>
+            <div>Name:
+                <input name="name" type="text"/>
+            </div>
+        <br>
+            <input type="submit" value="Login" />
+</form>
+</body>
+</html>

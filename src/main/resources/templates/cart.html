@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1 class="top-info-heading">Cart</h1>
-<p class="product product-description" th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} + ' | '"/>
+<p class="product product-description" th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} "/>
 
 <p>
   <button type="button" onclick="location.href='/cart/delete'">Clear cart</button>

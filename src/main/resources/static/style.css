@@ -10,8 +10,8 @@
               border-style: groove;
               display: flex;
               flex-direction: row;
-              padding-top: 20px;
-              padding-bottom: 20px;
+              padding-top: 10px;
+              padding-bottom: 10px;
 }
 .top-info-heading {
               font-size: 32px;
@@ -24,8 +24,7 @@
 }
 .product-description{
               font-size: 20px;
-              line-height: 30px;
               color: #1F3F68;
               letter-spacing: 0.05em;
-              margin-bottom: 14px;
+              margin-bottom: 10px;
 }
