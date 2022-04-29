@@ -31,13 +31,9 @@ public class CustomersController {
     public String showCustomerInfo(@RequestParam(required = false) Integer id, Model uiModel) {
         if (id !=null) {
         List<Order> orderList=  customerRepository.getById(id).getOrders();
-        List<Product> productList = new ArrayList<Product>();
-        for (int k = 0; k < orderList.size(); k++) {
-            productList.add(orderList.get(k).getProduct());
-        }
         uiModel.addAttribute("customer_id", id);
         uiModel.addAttribute("customer_name", customerRepository.findById(id).get().getName());
-        uiModel.addAttribute("products", productList);}
+        uiModel.addAttribute("orders", orderList);}
         return "orders";
     }
 
@@ -45,11 +41,7 @@ public class CustomersController {
     public String authorization(@RequestParam(required = false) String customer, Model uiModel) {
         if (customerRepository.findByName(customer) !=null) {
         List<Order> orderList = customerRepository.findByName(customer).getOrders();
-        List<Product> productList = new ArrayList<Product>();
-        for (int k = 0; k < orderList.size(); k++) {
-            productList.add(orderList.get(k).getProduct());
-        }
-        uiModel.addAttribute("products", productList);}
+        uiModel.addAttribute("orders", orderList);}
         else customerRepository.save(new Customer(customer));
         uiModel.addAttribute("customer_name", customer);
         uiModel.addAttribute("customer_id", customerRepository.findByName(customer).getId());

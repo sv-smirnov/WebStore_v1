@@ -8,13 +8,13 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public Customer() {

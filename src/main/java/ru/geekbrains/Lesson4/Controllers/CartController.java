@@ -10,6 +10,7 @@ import ru.geekbrains.Lesson4.Entities.Product;
 import ru.geekbrains.Lesson4.Repositiry.CartRepository;
 import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
 import ru.geekbrains.Lesson4.Repositiry.OrderRepository;
+import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
 
 import java.util.List;
 
@@ -18,10 +19,11 @@ public class CartController {
     CartRepository cartRepository;
     CustomerRepository customerRepository;
     OrderRepository orderRepository;
+    ProductRepository productRepository;
 
-    public CartController(CartRepository cartRepository, CustomerRepository customerRepository, OrderRepository orderRepository) {
+    public CartController(ProductRepository productRepository, CartRepository cartRepository, CustomerRepository customerRepository, OrderRepository orderRepository) {
         this.cartRepository = cartRepository; this.customerRepository = customerRepository;
-        this.orderRepository = orderRepository;
+        this.orderRepository = orderRepository; this.productRepository = productRepository;
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
@@ -49,15 +51,22 @@ public class CartController {
             }
         }
         cartRepository.getCart().clear();
-        uiModel.addAttribute("cart", cartRepository.getCart());
+        uiModel.addAttribute("products", productRepository.findAll());
         System.out.println(cartRepository.getCart());
-        return "cart";
+        return "home";
     }
     @RequestMapping(value = "/cart/deleteOrder", method = RequestMethod.GET)
-    public String deleteOrder(@RequestParam(required = false) Integer customer, @RequestParam(required = false) Product id, Model uiModel) {
+    public String deleteOrder(@RequestParam(required = false) Integer customer, Model uiModel, @RequestParam(required = false) List<Integer> id) {
         uiModel.addAttribute("customer_id", customer);
         uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
-        return "customers";
+        if (id!=null) {
+            for (int i = 0; i < id.size(); i++) {
+                orderRepository.deleteById(id.get(i));
+            }
+            List<Order> orderList = customerRepository.findById(customer).get().getOrders();
+            uiModel.addAttribute("orders", orderList);
+        }
+        return "orders";
     }
 
 }

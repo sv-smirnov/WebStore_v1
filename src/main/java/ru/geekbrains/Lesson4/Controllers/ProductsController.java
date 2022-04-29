@@ -40,8 +40,8 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/products/add", method = RequestMethod.GET)
-    public String getForm(Model uiModel, @RequestParam(required = false) Integer customer, @RequestParam Integer id, @RequestParam String name, @RequestParam Double cost) {
-        productRepository.save(new Product(id, name, cost));
+    public String getForm(Model uiModel, @RequestParam(required = false) Integer customer, @RequestParam String name, @RequestParam Double cost) {
+        productRepository.save(new Product(name, cost));
         uiModel.addAttribute("customer_id", customer);
         uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
         uiModel.addAttribute("products", productRepository.findAll());
@@ -49,14 +49,17 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/products/toCart", method = RequestMethod.GET)
-    public String toCart(@RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer customer) {
+    public String toCart(Model uiModel, @RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer customer) {
         if (id != null) {
             for (int i = 0; i < id.size(); i++) {
                 cartRepository.addToCart(productRepository.getById(id.get(i)));
             }
         }
+        uiModel.addAttribute("customer_id", customer);
+        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+        uiModel.addAttribute("cart", cartRepository.getCart());
         System.out.println(cartRepository.getCart());
-        return "redirect:/products?id=" + customer;
+        return "cart";
     }
     @RequestMapping(value = "/products/delete", method = RequestMethod.GET)
     public String deleteProduts(Model uiModel, @RequestParam(required = false) Integer customer,@RequestParam(required = false) List<Integer> id) {

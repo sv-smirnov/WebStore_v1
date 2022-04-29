@@ -8,7 +8,7 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column(name = "name")
@@ -17,7 +17,7 @@ public class Product {
     @Column(name = "cost")
     private double cost;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval=true, fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public Product() {
@@ -25,6 +25,10 @@ public class Product {
 
     public Product(int id, String name, double cost) {
         this.id = id;
+        this.name = name;
+        this.cost = cost;
+    }
+    public Product(String name, double cost) {
         this.name = name;
         this.cost = cost;
     }
