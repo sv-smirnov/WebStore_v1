@@ -1,12 +1,12 @@
 package ru.geekbrains.Lesson4.Repositiry;
 
+import org.springframework.stereotype.Repository;
 import ru.geekbrains.Lesson4.Entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-@org.springframework.stereotype.Repository
+@Repository
 public class CartRepository {
     ArrayList<Product> cart;
 

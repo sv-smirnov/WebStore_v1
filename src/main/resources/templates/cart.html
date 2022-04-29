@@ -6,14 +6,20 @@
   <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
 </head>
 <body>
+<form name="cart_form" action="/cart">
 <h1 class="top-info-heading">Cart</h1>
+<input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
 <p class="product product-description" th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} "/>
 
 <p>
-  <button type="button" onclick="location.href='/cart/delete'">Clear cart</button>
+  <button type="submit" onclick="cart_form.action = '/cart/delete'">Clear cart</button>
 </p>
 <p>
-  <button type="button" onclick="location.href='/products'">Return to products</button>
+  <button type="submit" onclick="cart_form.action = '/products'">Return to products</button>
 </p>
+  <p>
+    <button type="submit" onclick="cart_form.action = '/cart/createOrder'">Create order</button>
+  </p>
+</form>
 </body>
 </html>

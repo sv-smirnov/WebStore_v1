@@ -11,6 +11,7 @@
 <body>
 <form action="add" method="get">
   <h1 class="top-info-heading">New product</h1>
+  <input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
   <ul>
     <li id="li_1">
       <div>ID:

@@ -7,7 +7,8 @@
 </head>
 <body>
 <form name="product_form" action="/products/toCart" method="get">
-    <h1 class="top-info-heading">All products</h1>
+    <h1 class="top-info-heading">Products</h1>
+    <input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
     <div class="product-box"><ul>
         <th:block th:each="product : ${products}">
             <div class="product product-description"><input type="checkbox" name="id" th:value="${product.id}"
@@ -18,13 +19,16 @@
         <button type="submit">Add to cart</button>
     </p>
     <p>
-        <button type="button" onclick="location.href='/cart'">Go to cart</button>
+        <button type="submit" onclick="product_form.action = '/cart'">Go to cart</button>
     </p>
     <p>
-        <button type="button" onclick="location.href='/products/new'">Add new product</button>
+        <button type="submit" onclick="product_form.action = '/products/new'">Add new product</button>
     </p>
     <p>
         <button type="submit" onclick="product_form.action = '/products/delete'">Delete products</button>
+    </p>
+    <p>
+        <button type="submit" onclick="product_form.action = '/customers'">Return to customers</button>
     </p>
     <form/>
 </body>

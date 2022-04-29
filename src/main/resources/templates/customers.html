@@ -6,7 +6,7 @@
     <title>Customers</title>
 </head>
 <body>
-<form action="/customers/showInfo" method="get">
+<form name="customer_form" action="/customers/showInfo" method="get">
     <h1 class="top-info-heading">All customers</h1>
     <div class="product-box"><ul>
         <th:block th:each="customer : ${customers}">
@@ -15,10 +15,13 @@
         </th:block>
     </ul></div>
     <p>
-        <button type="submit">Show purchases</button>
+        <button type="submit">Show orders</button>
     </p>
     <p>
-        <button type="button" onclick="location.href='/products'">Return to products</button>
+        <button type="submit" onclick="customer_form.action = '/products'">Go to store</button>
+    </p>
+    <p>
+        <button type="submit" onclick="customer_form.action = '/customers/delete'">Delete customer</button>
     </p>
     <form/>
 </body>
