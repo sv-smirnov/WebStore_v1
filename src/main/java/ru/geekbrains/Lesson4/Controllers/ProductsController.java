@@ -49,12 +49,13 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/products/toCart", method = RequestMethod.GET)
-    public String toCart(Model uiModel, @RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer customer) {
-        if (id != null) {
-            for (int i = 0; i < id.size(); i++) {
-                cartRepository.addToCart(productRepository.getById(id.get(i)));
-            }
-        }
+    public String toCart(Model uiModel, @RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer customer, @RequestParam(required = false) Integer addProd) {
+//        if (id != null) {
+//            for (int i = 0; i < id.size(); i++) {
+//                cartRepository.addToCart(productRepository.getById(id.get(i)));
+//            }
+//        }
+        if (addProd != null) {cartRepository.addToCart(productRepository.getById(addProd));}
         uiModel.addAttribute("customer_id", customer);
         uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
         uiModel.addAttribute("cart", cartRepository.getCart());
@@ -62,12 +63,13 @@ public class ProductsController {
         return "cart";
     }
     @RequestMapping(value = "/products/delete", method = RequestMethod.GET)
-    public String deleteProduts(Model uiModel, @RequestParam(required = false) Integer customer,@RequestParam(required = false) List<Integer> id) {
-        if (id != null) {
-            for (int i = 0; i < id.size(); i++) {
-                productRepository.deleteById(id.get(i));
-            }
-        }
+    public String deleteProduts(Model uiModel, @RequestParam(required = false) Integer customer,@RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer delProd) {
+//        if (id != null) {
+//            for (int i = 0; i < id.size(); i++) {
+//                productRepository.deleteById(id.get(i));
+//            }
+//        }
+        if (delProd != null) {productRepository.deleteById(delProd);}
         uiModel.addAttribute("customer_id", customer);
         uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
         uiModel.addAttribute("products", productRepository.findAll());

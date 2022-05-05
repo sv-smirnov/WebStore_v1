@@ -12,6 +12,7 @@
               flex-direction: row;
               padding-top: 10px;
               padding-bottom: 10px;
+              margin-right:auto;
 }
 .top-info-heading {
               font-size: 32px;
@@ -27,4 +28,9 @@
               color: #1F3F68;
               letter-spacing: 0.05em;
               margin-bottom: 10px;
+}
+.buttons{
+              display: flex;
+              flex-direction: row;
+              margin-left: auto;
 }

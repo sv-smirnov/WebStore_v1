@@ -33,8 +33,9 @@ public class CustomersController {
         List<Order> orderList=  customerRepository.getById(id).getOrders();
         uiModel.addAttribute("customer_id", id);
         uiModel.addAttribute("customer_name", customerRepository.findById(id).get().getName());
-        uiModel.addAttribute("orders", orderList);}
-        return "orders";
+        uiModel.addAttribute("orders", orderList);
+        return "orders";}
+        else return "customers";
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.GET)
@@ -49,9 +50,12 @@ public class CustomersController {
     }
     @RequestMapping(value = "/customers/delete", method = RequestMethod.GET)
     public String deleteCustomer(@RequestParam(required = false) Integer id, Model uiModel) {
-        customerRepository.delete(customerRepository.getById(id));
-        uiModel.addAttribute("customers", customerRepository.findAll());
-        return "customers";
+        if (id !=null) {
+            customerRepository.delete(customerRepository.getById(id));
+            uiModel.addAttribute("customers", customerRepository.findAll());
+            return "customers";
+        }
+        else return "customers";
     }
 
 
