@@ -34,3 +34,31 @@
               flex-direction: row;
               margin-left: auto;
 }
+.article__btn {
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #7133cc;;
+  background-color: transparent;
+  cursor: pointer;
+  transition-property: color, background-color;
+  transition-duration: 0.3s;
+}
+
+.article__btn:focus {
+  outline: none;
+  color: #fff;
+  background-color: #7133cc;;
+}
+
+.article__btn:hover {
+  color: #fff;
+  background-color: #7133cc;;
+}
+
+.article__btn:active {
+  color: #fff;
+  background-color: #7133cc;;
+}

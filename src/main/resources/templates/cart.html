@@ -12,13 +12,13 @@
 <p class="product product-description" th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} "/>
 
 <p>
-  <button type="submit" onclick="cart_form.action = '/cart/delete'">Clear cart</button>
+  <button type="submit" class="article__btn" onclick="cart_form.action = '/cart/delete'">Clear cart</button>
 </p>
 <p>
-  <button type="submit" onclick="cart_form.action = '/products'">Return to products</button>
+  <button type="submit" class="article__btn" onclick="cart_form.action = '/products'">Return to products</button>
 </p>
   <p >
-    <button type="submit" onclick="cart_form.action = '/cart/createOrder'">Create order</button>
+    <button type="submit" class="article__btn" onclick="cart_form.action = '/cart/createOrder'">Create order</button>
   </p>
 </form>
 </body>

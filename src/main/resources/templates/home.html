@@ -14,8 +14,8 @@
             <div class="product-description product">
                 <output th:text="' #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost}"></output>
                 <div class="buttons">
-                    <button type="submit" name="addProd"  th:value="${product.id}" >Add to Cart</button>
-                    <button type="submit" name="delProd"  th:value="${product.id}" onclick="product_form.action = '/products/delete'" > Delete product</button>
+                    <button type="submit" name="addProd" class="article__btn" th:value="${product.id}" >Add to Cart</button>
+                    <button type="submit" name="delProd" class="article__btn" th:value="${product.id}" onclick="product_form.action = '/products/delete'" > Delete product</button>
                 </div>
             </div>
         </th:block>
@@ -24,16 +24,16 @@
 <!--        <button type="submit">Add to cart</button>-->
 <!--    </p>-->
     <p>
-        <button type="submit" onclick="product_form.action = '/cart'">Go to cart</button>
+        <button type="submit" class="article__btn" onclick="product_form.action = '/cart'">Go to cart</button>
     </p>
     <p>
-        <button type="submit" onclick="product_form.action = '/products/new'">Add new product</button>
+        <button type="submit" class="article__btn" onclick="product_form.action = '/products/new'">Add new product</button>
     </p>
 <!--    <p>-->
 <!--        <button type="submit" onclick="product_form.action = '/products/delete'">Delete products</button>-->
 <!--    </p>-->
     <p>
-        <button type="submit" onclick="product_form.action = '/customers'">Return to customers</button>
+        <button type="submit" class="article__btn" onclick="product_form.action = '/customers'">Return to customers</button>
     </p>
     <form/>
 </body>
