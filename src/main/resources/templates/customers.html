@@ -7,10 +7,10 @@
 </head>
 <body>
 <form name="customer_form" action="/customers/showInfo" method="get">
-        <h1 class="top-info-heading">All customers</h1>
+    <h1 class="top-info-heading">All customers</h1>
     <div class="container placement__list">
         <div class="product-box">
-            <ul>
+            <ul class="services__title">
                 <th:block th:each="customer : ${customers}">
                     <div class="product product-description"><input type="radio" name="id" th:value="${customer.id}"
                                                                     th:text="'| #' + ${customer.id} + ' | ' + ${customer.name} ">

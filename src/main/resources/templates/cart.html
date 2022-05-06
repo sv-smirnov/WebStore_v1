@@ -15,7 +15,7 @@
             <ul>
                 <th:block th:each="product : ${cart}">
                     <div class="product product-description">
-                        <output th:text="' #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost}"></output>
+                        <output class="services__title" th:text="' #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost}"></output>
                     </div>
                 </th:block>
             </ul>

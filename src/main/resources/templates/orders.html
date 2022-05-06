@@ -9,19 +9,26 @@
 <form name="product_form" action="/products/toCart" method="get">
     <h1 class="top-info-heading">Orders</h1>
     <input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
-    <div class="product-box"><ul>
+    <div product-box
+    <ul>
         <th:block th:each="order : ${orders}">
-            <div class="product product-description"><input type="checkbox" name="id" th:value="${order.getId}"
-                                                            th:text="'| #' + ${order.getProduct.getId} + ' | ' + ${order.getProduct.getName} + ' | '+ ${order.getProduct.getCost} "></div>
+            <div class="product product-description"><input class="services__title" type="checkbox" name="id"
+                                                            th:value="${order.getId}"
+                                                            th:text="'| #' + ${order.getProduct.getId} + ' | ' + ${order.getProduct.getName} + ' | '+ ${order.getProduct.getCost} ">
+            </div>
         </th:block>
-    </ul></div>
+    </ul>
+    </div>
     <div class="container">
-    <p>
-        <button type="submit" class="article__btn"  onclick="product_form.action = '/products'">Add new order</button>
-    </p>
-    <p>
-        <button type="submit" class="article__btn" onclick="product_form.action = '/cart/deleteOrder'">Delete orders</button>
-    </p>
+        <p>
+            <button type="submit" class="article__btn" onclick="product_form.action = '/products'">Add new order
+            </button>
+        </p>
+        <p>
+            <button type="submit" class="article__btn" onclick="product_form.action = '/cart/deleteOrder'">Delete
+                orders
+            </button>
+        </p>
     </div>
     <form/>
 </body>

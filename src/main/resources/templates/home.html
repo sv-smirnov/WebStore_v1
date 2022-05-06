@@ -15,7 +15,7 @@
             <ul>
                 <th:block th:each="product : ${products}">
                     <div class="product-description product">
-                        <output th:text="' #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost}"></output>
+                        <output class="services__title" th:text="' #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost}"></output>
                         <div class="buttons">
                             <button type="submit" name="addProd" class="article__btn" th:value="${product.id}">Add to
                                 Cart

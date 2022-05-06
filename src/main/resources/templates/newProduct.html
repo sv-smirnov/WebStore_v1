@@ -4,37 +4,39 @@
       lang="ru">
 
 <head>
-  <title>New Product</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
+    <title>New Product</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
 </head>
 <body>
 <form action="add" method="get">
-  <h1 class="top-info-heading">New product</h1>
-  <input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
-  <ul>
-<!--    <li id="li_1">-->
-<!--      <div>ID:-->
-<!--        <input id="id" name="id" type="text"/>-->
-<!--      </div>-->
-<!--    </li>-->
-<!--    <br>-->
-    <li id="li_2">
-      <div>Name:
-        <input id="name" name="name" type="text" />
-      </div>
-    </li>
-    <br>
-    <li id="li_3">
-      <div>Cost:
-        <input id="cost" name="cost" type="text" />
-      </div>
-    </li>
-    <br>
-    <li>
-      <input type="submit" class="article__btn" value="Add" />
-    </li>
-  </ul>
+    <h1 class="top-info-heading">New product</h1>
+    <input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
+    <div class="container placement__list">
+        <ul class="services__title">
+            <!--    <li id="li_1">-->
+            <!--      <div>ID:-->
+            <!--        <input id="id" name="id" type="text"/>-->
+            <!--      </div>-->
+            <!--    </li>-->
+            <!--    <br>-->
+            <li id="li_2">
+                <div>Name:
+                    <input id="name" name="name" type="text"/>
+                </div>
+            </li>
+            <br>
+            <li id="li_3">
+                <div>Cost:
+                    <input id="cost" name="cost" type="text"/>
+                </div>
+            </li>
+            <br>
+            <li>
+                <input type="submit" class="article__btn" value="Add"/>
+            </li>
+        </ul>
+    </div>
 </form>
 </body>
 </html>

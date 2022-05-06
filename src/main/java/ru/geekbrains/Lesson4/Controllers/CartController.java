@@ -22,8 +22,10 @@ public class CartController {
     ProductRepository productRepository;
 
     public CartController(ProductRepository productRepository, CartRepository cartRepository, CustomerRepository customerRepository, OrderRepository orderRepository) {
-        this.cartRepository = cartRepository; this.customerRepository = customerRepository;
-        this.orderRepository = orderRepository; this.productRepository = productRepository;
+        this.cartRepository = cartRepository;
+        this.customerRepository = customerRepository;
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
@@ -45,7 +47,7 @@ public class CartController {
     public String createOrder(@RequestParam(required = false) Integer customer, Model uiModel) {
         uiModel.addAttribute("customer_id", customer);
         uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
-        if (cartRepository !=null){
+        if (cartRepository != null) {
             for (int i = 0; i < cartRepository.getCart().size(); i++) {
                 orderRepository.save(new Order(customerRepository.getById(customer), cartRepository.getCart().get(i)));
             }
@@ -55,11 +57,12 @@ public class CartController {
         System.out.println(cartRepository.getCart());
         return "home";
     }
+
     @RequestMapping(value = "/cart/deleteOrder", method = RequestMethod.GET)
     public String deleteOrder(@RequestParam(required = false) Integer customer, Model uiModel, @RequestParam(required = false) List<Integer> id) {
         uiModel.addAttribute("customer_id", customer);
         uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
-        if (id!=null) {
+        if (id != null) {
             for (int i = 0; i < id.size(); i++) {
                 orderRepository.deleteById(id.get(i));
             }
