@@ -7,22 +7,32 @@
 </head>
 <body>
 <form name="customer_form" action="/customers/showInfo" method="get">
-    <h1 class="top-info-heading">All customers</h1>
-    <div class="product-box"><ul>
-        <th:block th:each="customer : ${customers}">
-            <div class="product product-description"><input type="radio" name="id" th:value="${customer.id}"
-                                                            th:text="'| #' + ${customer.id} + ' | ' + ${customer.name} "></div>
-        </th:block>
-    </ul></div>
-    <p>
-        <button type="submit" class="article__btn" >Show orders</button>
-    </p>
-    <p>
-        <button type="submit" class="article__btn" onclick="customer_form.action = '/products'">Go to store</button>
-    </p>
-    <p>
-        <button type="submit" class="article__btn" onclick="customer_form.action = '/customers/delete'">Delete customer</button>
-    </p>
-    <form/>
+        <h1 class="top-info-heading">All customers</h1>
+    <div class="container placement__list">
+        <div class="product-box">
+            <ul>
+                <th:block th:each="customer : ${customers}">
+                    <div class="product product-description"><input type="radio" name="id" th:value="${customer.id}"
+                                                                    th:text="'| #' + ${customer.id} + ' | ' + ${customer.name} ">
+                    </div>
+                </th:block>
+            </ul>
+        </div>
+        <div class="container">
+            <p>
+                <button type="submit" class="article__btn">Show orders</button>
+            </p>
+            <p>
+                <button type="submit" class="article__btn" onclick="customer_form.action = '/products'">Go to store
+                </button>
+            </p>
+            <p>
+                <button type="submit" class="article__btn" onclick="customer_form.action = '/customers/delete'">Delete
+                    customer
+                </button>
+            </p>
+        </div>
+    </div>
+</form>
 </body>
 </html>

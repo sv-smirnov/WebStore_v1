@@ -1,6 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerLight.woff2'),
+    url('../fonts/MullerLight.woff');
+  font-display: swap;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerRegular.woff2'),
+    url('../fonts/MullerRegular.woff');
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerMedium.woff2'),
+    url('../fonts/MullerMedium.woff');
+  font-display: swap;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Muller';
+  src: url('../fonts/MullerBold.woff2'),
+    url('../fonts/MullerBold.woff');
+  font-display: swap;
+  font-weight: 700;
+}
+:root {
+  --accent-color: #cc9933;
+  --accent-active: #a47312;
+}
+
+body {
+  min-width: 1170px;
+  font-family: 'Muller', sans-serif;
+  background-color: #f1f1f1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
 .product-box{
               display: flex;
+                flex-wrap: wrap;
               justify-content: space-between;
+
 }
 .product{
               box-sizing: border-box;
@@ -60,5 +116,16 @@
 
 .article__btn:active {
   color: #fff;
-  background-color: #7133cc;;
+  background-color: #7133cc;
 }
+
+.container {
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.placement__list {
+  display: flex;
+  flex-wrap: wrap;
+}
+

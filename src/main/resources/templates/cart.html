@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Cart</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
+    <title>Cart</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
 </head>
 <body>
 <form name="cart_form" action="/cart">
-<h1 class="top-info-heading">Cart</h1>
-<input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
-<p class="product product-description" th:each="product : ${cart}" th:text="'| #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost} "/>
 
-<p>
-  <button type="submit" class="article__btn" onclick="cart_form.action = '/cart/delete'">Clear cart</button>
-</p>
-<p>
-  <button type="submit" class="article__btn" onclick="cart_form.action = '/products'">Return to products</button>
-</p>
-  <p >
-    <button type="submit" class="article__btn" onclick="cart_form.action = '/cart/createOrder'">Create order</button>
-  </p>
+        <h1 class="top-info-heading">Cart</h1>
+        <input type="hidden" th:text="'You authorized as '+ ${customer_name}" name="customer" th:value="${customer_id}">
+    <div class="container placement__list">
+        <div class="product-box">
+            <ul>
+                <th:block th:each="product : ${cart}">
+                    <div class="product product-description">
+                        <output th:text="' #' + ${product.id} + ' | ' + ${product.name} + ' | '+ ${product.cost}"></output>
+                    </div>
+                </th:block>
+            </ul>
+        </div>
+        <div class="container">
+            <p>
+                <button type="submit" class="article__btn" onclick="cart_form.action = '/cart/delete'">Clear cart
+                </button>
+            </p>
+            <p>
+                <button type="submit" class="article__btn" onclick="cart_form.action = '/products'">Return to products
+                </button>
+            </p>
+            <p>
+                <button type="submit" class="article__btn" onclick="cart_form.action = '/cart/createOrder'">Create order
+                </button>
+            </p>
+        </div>
+    </div>
 </form>
 </body>
 </html>
