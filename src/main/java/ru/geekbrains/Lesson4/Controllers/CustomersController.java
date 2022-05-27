@@ -59,7 +59,7 @@ public class CustomersController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/mylogin", method = RequestMethod.GET)
     public String login(Model uiModel) {
         return "registration";
     }
