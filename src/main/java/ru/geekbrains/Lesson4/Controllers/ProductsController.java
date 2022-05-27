@@ -1,13 +1,17 @@
 package ru.geekbrains.Lesson4.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.Lesson4.Entities.Customer;
 import ru.geekbrains.Lesson4.Entities.Product;
 import ru.geekbrains.Lesson4.Repositiry.CartRepository;
 import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
 import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.Services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -15,6 +19,12 @@ public class ProductsController {
     ProductRepository productRepository;
     CartRepository cartRepository;
     CustomerRepository customerRepository;
+    UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     public ProductsController(ProductRepository productRepository, CartRepository cartRepository, CustomerRepository customerRepository) {
         this.productRepository = productRepository;
@@ -23,55 +33,48 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String showAllProducts(@RequestParam(required = false) Integer id,@RequestParam(required = false) Integer customer, Model uiModel) {
-        if (customer!=null) {id = customer;}
-        uiModel.addAttribute("customer_id", id);
-        uiModel.addAttribute("customer_name", customerRepository.findById(id).get().getName());
+    public String showAllProducts(Principal principal, Model uiModel) {
+        Customer customer = userService.findByName(principal.getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         uiModel.addAttribute("products", productRepository.findAll());
         return "home";
     }
 
     @RequestMapping(value = "/products/new", method = RequestMethod.GET)
-    public String addProduct(@RequestParam(required = false) Integer id,@RequestParam(required = false) Integer customer, Model uiModel) {
-        if (customer!=null) {id = customer;}
-        uiModel.addAttribute("customer_id", id);
-        uiModel.addAttribute("customer_name", customerRepository.findById(id).get().getName());
+    public String addProduct(Principal principal, Model uiModel) {
+        Customer customer = userService.findByName(principal.getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         return "newProduct";
     }
 
     @RequestMapping(value = "/products/add", method = RequestMethod.GET)
-    public String getForm(Model uiModel, @RequestParam(required = false) Integer customer, @RequestParam String name, @RequestParam Double cost) {
+    public String getForm(Principal principal, Model uiModel, @RequestParam String name, @RequestParam Double cost) {
+        Customer customer = userService.findByName(principal.getName());
         productRepository.save(new Product(name, cost));
-        uiModel.addAttribute("customer_id", customer);
-        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         uiModel.addAttribute("products", productRepository.findAll());
         return "home";
     }
 
     @RequestMapping(value = "/products/toCart", method = RequestMethod.GET)
-    public String toCart(Model uiModel, @RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer customer, @RequestParam(required = false) Integer addProd) {
-//        if (id != null) {
-//            for (int i = 0; i < id.size(); i++) {
-//                cartRepository.addToCart(productRepository.getById(id.get(i)));
-//            }
-//        }
+    public String toCart(Model uiModel, Principal principal,  @RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer addProd) {
+        Customer customer = userService.findByName(principal.getName());
         if (addProd != null) {cartRepository.addToCart(productRepository.getById(addProd));}
-        uiModel.addAttribute("customer_id", customer);
-        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         uiModel.addAttribute("cart", cartRepository.getCart());
         System.out.println(cartRepository.getCart());
         return "cart";
     }
     @RequestMapping(value = "/products/delete", method = RequestMethod.GET)
-    public String deleteProduts(Model uiModel, @RequestParam(required = false) Integer customer,@RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer delProd) {
-//        if (id != null) {
-//            for (int i = 0; i < id.size(); i++) {
-//                productRepository.deleteById(id.get(i));
-//            }
-//        }
+    public String deleteProduts(Model uiModel,Principal principal, @RequestParam(required = false) List<Integer> id, @RequestParam(required = false) Integer delProd) {
+        Customer customer = userService.findByName(principal.getName());
         if (delProd != null) {productRepository.deleteById(delProd);}
-        uiModel.addAttribute("customer_id", customer);
-        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         uiModel.addAttribute("products", productRepository.findAll());
         return "home";
     }

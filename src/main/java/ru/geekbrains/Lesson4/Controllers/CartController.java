@@ -1,17 +1,21 @@
 package ru.geekbrains.Lesson4.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.geekbrains.Lesson4.Entities.Customer;
 import ru.geekbrains.Lesson4.Entities.Order;
 import ru.geekbrains.Lesson4.Entities.Product;
 import ru.geekbrains.Lesson4.Repositiry.CartRepository;
 import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
 import ru.geekbrains.Lesson4.Repositiry.OrderRepository;
 import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.Services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,6 +24,12 @@ public class CartController {
     CustomerRepository customerRepository;
     OrderRepository orderRepository;
     ProductRepository productRepository;
+    UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     public CartController(ProductRepository productRepository, CartRepository cartRepository, CustomerRepository customerRepository, OrderRepository orderRepository) {
         this.cartRepository = cartRepository;
@@ -29,9 +39,10 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public String showAllProducts(@RequestParam(required = false) Integer customer, Model uiModel) {
-        uiModel.addAttribute("customer_id", customer);
-        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+    public String showAllProducts(Principal principal, Model uiModel) {
+        Customer customer = userService.findByName(principal.getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         uiModel.addAttribute("cart", cartRepository.getCart());
         System.out.println(cartRepository.getCart());
         return "cart";
@@ -44,12 +55,13 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart/createOrder", method = RequestMethod.GET)
-    public String createOrder(@RequestParam(required = false) Integer customer, Model uiModel) {
-        uiModel.addAttribute("customer_id", customer);
-        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+    public String createOrder(Principal principal, Model uiModel) {
+        Customer customer = userService.findByName(principal.getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         if (cartRepository != null) {
             for (int i = 0; i < cartRepository.getCart().size(); i++) {
-                orderRepository.save(new Order(customerRepository.getById(customer), cartRepository.getCart().get(i)));
+                orderRepository.save(new Order(customerRepository.getById(customer.getId()), cartRepository.getCart().get(i)));
             }
         }
         cartRepository.getCart().clear();
@@ -59,14 +71,15 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart/deleteOrder", method = RequestMethod.GET)
-    public String deleteOrder(@RequestParam(required = false) Integer customer, Model uiModel, @RequestParam(required = false) List<Integer> id) {
-        uiModel.addAttribute("customer_id", customer);
-        uiModel.addAttribute("customer_name", customerRepository.findById(customer).get().getName());
+    public String deleteOrder(Principal principal, Model uiModel, @RequestParam(required = false) List<Integer> id) {
+        Customer customer = userService.findByName(principal.getName());
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         if (id != null) {
             for (int i = 0; i < id.size(); i++) {
                 orderRepository.deleteById(id.get(i));
             }
-            List<Order> orderList = customerRepository.findById(customer).get().getOrders();
+            List<Order> orderList = customer.getOrders();
             uiModel.addAttribute("orders", orderList);
         }
         return "orders";

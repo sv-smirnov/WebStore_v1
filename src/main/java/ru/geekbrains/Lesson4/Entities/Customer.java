@@ -11,17 +11,25 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "username")
     private String name;
 
-    @OneToMany(mappedBy = "customer", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public Customer() {
     }
+
     public Customer(String name) {
         this.name = name;
     }
+
     public Customer(int id, String name) {
         this.id = id;
         this.name = name;
@@ -41,5 +49,13 @@ public class Customer {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

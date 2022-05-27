@@ -1,5 +1,6 @@
 package ru.geekbrains.Lesson4.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +10,20 @@ import ru.geekbrains.Lesson4.Entities.Product;
 import ru.geekbrains.Lesson4.Repositiry.CartRepository;
 import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
 import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.Services.UserService;
 
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class CustomersController {
     CustomerRepository customerRepository;
+    UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     public CustomersController(ProductRepository productRepository, CartRepository cartRepository, CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -28,34 +36,33 @@ public class CustomersController {
     }
 
     @RequestMapping(value = "/customers/showInfo", method = RequestMethod.GET)
-    public String showCustomerInfo(@RequestParam(required = false) Integer id, Model uiModel) {
-        if (id !=null) {
-        List<Order> orderList=  customerRepository.getById(id).getOrders();
-        uiModel.addAttribute("customer_id", id);
-        uiModel.addAttribute("customer_name", customerRepository.findById(id).get().getName());
+    public String showCustomerInfo(Principal principal, Model uiModel) {
+        Customer customer = userService.findByName(principal.getName());
+        List<Order> orderList = customer.getOrders();
+        uiModel.addAttribute("customer_id", customer.getId());
+        uiModel.addAttribute("customer_name", customer.getName());
         uiModel.addAttribute("orders", orderList);
-        return "orders";}
-        else return "customers";
+        return "orders";
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.GET)
     public String authorization(@RequestParam(required = false) String customer, Model uiModel) {
-        if (customerRepository.findByName(customer) !=null) {
-        List<Order> orderList = customerRepository.findByName(customer).getOrders();
-        uiModel.addAttribute("orders", orderList);}
-        else customerRepository.save(new Customer(customer));
+        if (customerRepository.findByName(customer) != null) {
+            List<Order> orderList = customerRepository.findByName(customer).getOrders();
+            uiModel.addAttribute("orders", orderList);
+        } else customerRepository.save(new Customer(customer));
         uiModel.addAttribute("customer_name", customer);
         uiModel.addAttribute("customer_id", customerRepository.findByName(customer).getId());
         return "orders";
     }
+
     @RequestMapping(value = "/customers/delete", method = RequestMethod.GET)
     public String deleteCustomer(@RequestParam(required = false) Integer id, Model uiModel) {
-        if (id !=null) {
+        if (id != null) {
             customerRepository.delete(customerRepository.getById(id));
             uiModel.addAttribute("customers", customerRepository.findAll());
             return "customers";
-        }
-        else return "customers";
+        } else return "customers";
     }
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@
                             <button type="submit" name="addProd" class="article__btn" th:value="${product.id}">Add to
                                 Cart
                             </button>
-                            <button type="submit" name="delProd" class="article__btn" th:value="${product.id}"
+                            <button sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" type="submit" name="delProd" class="article__btn" th:value="${product.id}"
                                     onclick="product_form.action = '/products/delete'"> Delete product
                             </button>
                         </div>
@@ -36,7 +37,7 @@
                 <button type="submit" class="article__btn" onclick="product_form.action = '/cart'">Go to cart</button>
             </p>
             <p>
-                <button type="submit" class="article__btn" onclick="product_form.action = '/products/new'">Add new
+                <button sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" type="submit" class="article__btn" onclick="product_form.action = '/products/new'">Add new
                     product
                 </button>
             </p>
@@ -44,7 +45,7 @@
             <!--        <button type="submit" onclick="product_form.action = '/products/delete'">Delete products</button>-->
             <!--    </p>-->
             <p>
-                <button type="submit" class="article__btn" onclick="product_form.action = '/customers'">Return to
+                <button sec:authorize="hasAnyRole('ADMIN', 'MANAGER')" type="submit" class="article__btn" onclick="product_form.action = '/customers'">Return to
                     customers
                 </button>
             </p>

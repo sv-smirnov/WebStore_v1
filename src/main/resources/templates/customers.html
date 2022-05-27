@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" link href="../static/style.css" th:href="@{/style.css}">
@@ -27,7 +28,7 @@
                 </button>
             </p>
             <p>
-                <button type="submit" class="article__btn" onclick="customer_form.action = '/customers/delete'">Delete
+                <button sec:authorize="hasRole('ADMIN')" type="submit" class="article__btn" onclick="customer_form.action = '/customers/delete'">Delete
                     customer
                 </button>
             </p>
