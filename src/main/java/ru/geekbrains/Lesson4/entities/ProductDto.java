@@ -1,8 +1,7 @@
-package ru.geekbrains.Lesson4.Entities;
+package ru.geekbrains.Lesson4.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Bean;
 
 @Data
 @NoArgsConstructor

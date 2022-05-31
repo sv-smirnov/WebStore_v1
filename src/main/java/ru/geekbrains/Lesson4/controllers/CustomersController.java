@@ -1,16 +1,16 @@
-package ru.geekbrains.Lesson4.Controllers;
+package ru.geekbrains.Lesson4.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.Lesson4.Entities.Customer;
-import ru.geekbrains.Lesson4.Entities.Order;
-import ru.geekbrains.Lesson4.Entities.Product;
-import ru.geekbrains.Lesson4.Repositiry.CartRepository;
-import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
-import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
-import ru.geekbrains.Lesson4.Services.UserService;
+import ru.geekbrains.Lesson4.entities.Customer;
+import ru.geekbrains.Lesson4.entities.Order;
+import ru.geekbrains.Lesson4.repositiry.CartRepository;
+import ru.geekbrains.Lesson4.repositiry.CustomerRepository;
+import ru.geekbrains.Lesson4.repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
@@ -46,14 +46,12 @@ public class CustomersController {
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.GET)
-    public String authorization(@RequestParam(required = false) String customer, Model uiModel) {
+    public String authorization(@RequestParam(required = false) String customer, Model uiModel, @RequestParam (required = false) String password) {
         if (customerRepository.findByName(customer) != null) {
-            List<Order> orderList = customerRepository.findByName(customer).getOrders();
-            uiModel.addAttribute("orders", orderList);
-        } else customerRepository.save(new Customer(customer));
-        uiModel.addAttribute("customer_name", customer);
-        uiModel.addAttribute("customer_id", customerRepository.findByName(customer).getId());
-        return "orders";
+            uiModel.addAttribute("message", new String("Пользователь с таким именем уже существует"));
+            return "registration";}
+         else {customerRepository.save(new Customer(customer, new BCryptPasswordEncoder().encode(password)));
+        return "redirect:/login";}
     }
 
     @RequestMapping(value = "/customers/delete", method = RequestMethod.GET)
@@ -66,7 +64,7 @@ public class CustomersController {
     }
 
 
-    @RequestMapping(value = "/mylogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String login(Model uiModel) {
         return "registration";
     }

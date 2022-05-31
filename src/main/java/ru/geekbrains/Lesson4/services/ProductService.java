@@ -1,9 +1,9 @@
-package ru.geekbrains.Lesson4.Services;
+package ru.geekbrains.Lesson4.services;
 
-import ru.geekbrains.Lesson4.Entities.Product;
-import ru.geekbrains.Lesson4.Entities.ProductDto;
-import ru.geekbrains.Lesson4.Entities.ProductMapper;
-import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.entities.Product;
+import ru.geekbrains.Lesson4.entities.ProductDto;
+import ru.geekbrains.Lesson4.entities.ProductMapper;
+import ru.geekbrains.Lesson4.repositiry.ProductRepository;
 
 import java.util.List;
 

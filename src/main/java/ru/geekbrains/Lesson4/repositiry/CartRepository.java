@@ -1,7 +1,7 @@
-package ru.geekbrains.Lesson4.Repositiry;
+package ru.geekbrains.Lesson4.repositiry;
 
 import org.springframework.stereotype.Repository;
-import ru.geekbrains.Lesson4.Entities.Product;
+import ru.geekbrains.Lesson4.entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;

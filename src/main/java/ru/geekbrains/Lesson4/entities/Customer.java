@@ -1,4 +1,4 @@
-package ru.geekbrains.Lesson4.Entities;
+package ru.geekbrains.Lesson4.entities;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,14 +26,12 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name) {
+    public Customer(String name, String password) {
         this.name = name;
+        this.password = password;
+        this.role = "ROLE_USER";
     }
 
-    public Customer(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public int getId() {
         return id;

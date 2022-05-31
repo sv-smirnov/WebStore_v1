@@ -1,15 +1,15 @@
-package ru.geekbrains.Lesson4.Controllers;
+package ru.geekbrains.Lesson4.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.Lesson4.Entities.Customer;
-import ru.geekbrains.Lesson4.Entities.Product;
-import ru.geekbrains.Lesson4.Repositiry.CartRepository;
-import ru.geekbrains.Lesson4.Repositiry.CustomerRepository;
-import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
-import ru.geekbrains.Lesson4.Services.UserService;
+import ru.geekbrains.Lesson4.entities.Customer;
+import ru.geekbrains.Lesson4.entities.Product;
+import ru.geekbrains.Lesson4.repositiry.CartRepository;
+import ru.geekbrains.Lesson4.repositiry.CustomerRepository;
+import ru.geekbrains.Lesson4.repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.services.UserService;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,6 +30,10 @@ public class ProductsController {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.customerRepository = customerRepository;
+    }
+    @RequestMapping("/")
+    public String home(){
+        return "registration";
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)

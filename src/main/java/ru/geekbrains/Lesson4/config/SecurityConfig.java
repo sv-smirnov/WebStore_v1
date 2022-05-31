@@ -1,4 +1,4 @@
-package ru.geekbrains.Lesson4.Config;
+package ru.geekbrains.Lesson4.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.geekbrains.Lesson4.Services.UserService;
+import ru.geekbrains.Lesson4.services.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/products/**").hasAnyRole("USER", "MANAGER", "ADMIN")
-                .antMatchers("/customers/**").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/customers/delete/**").hasAnyRole("ADMIN")
                 .and()
                 .formLogin()
 //                .loginPage("/login")

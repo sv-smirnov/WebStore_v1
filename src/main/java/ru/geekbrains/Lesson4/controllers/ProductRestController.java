@@ -1,14 +1,13 @@
-package ru.geekbrains.Lesson4.Controllers;
+package ru.geekbrains.Lesson4.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.Lesson4.Entities.Product;
-import ru.geekbrains.Lesson4.Entities.ProductDto;
-import ru.geekbrains.Lesson4.Entities.ProductMapper;
-import ru.geekbrains.Lesson4.Repositiry.ProductRepository;
+import ru.geekbrains.Lesson4.entities.Product;
+import ru.geekbrains.Lesson4.entities.ProductDto;
+import ru.geekbrains.Lesson4.entities.ProductMapper;
+import ru.geekbrains.Lesson4.repositiry.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/rest/products")
 @RestController

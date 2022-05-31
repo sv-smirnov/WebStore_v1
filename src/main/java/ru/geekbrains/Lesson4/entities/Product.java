@@ -1,4 +1,4 @@
-package ru.geekbrains.Lesson4.Entities;
+package ru.geekbrains.Lesson4.entities;
 
 import javax.persistence.*;
 import java.util.List;

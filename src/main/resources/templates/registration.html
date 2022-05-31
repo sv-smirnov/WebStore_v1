@@ -11,11 +11,20 @@
 <body>
 <form action="/auth" method="get">
     <h1 class="top-info-heading">Welcome to online store!</h1>
-            <div>Name:
+            <div>Login:
                 <input class="services__title" name="customer" type="text"/>
             </div>
         <br>
-            <input type="submit" class="article__btn" value="Login" />
+    <div>Password:
+        <input class="services__title" name="password" type="text"/>
+    </div>
+    <br>
+    <div>
+        <output class="services__title" th:text="${message}" type="text"/>
+    </div>
+    <br>
+            <input type="submit" class="article__btn" value="Registration" />
+            <input type="button" class="article__btn" onclick="location.href = '/login'" value="Already registered" />
 </form>
 </body>
 </html>

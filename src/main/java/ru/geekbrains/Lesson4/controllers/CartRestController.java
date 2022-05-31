@@ -1,10 +1,10 @@
-package ru.geekbrains.Lesson4.Controllers;
+package ru.geekbrains.Lesson4.controllers;
 
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.Lesson4.Entities.Product;
-import ru.geekbrains.Lesson4.Repositiry.CartRepository;
+import ru.geekbrains.Lesson4.entities.Product;
+import ru.geekbrains.Lesson4.repositiry.CartRepository;
 
 import java.util.List;
 
