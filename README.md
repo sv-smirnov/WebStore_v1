@@ -11,3 +11,7 @@
 - Spring Data JPA
 - Spring Security
 - HTML & CSS
+***
+### Запуск приложения:
+1. Развернуть сервер СУБД (по умолчанию localhost:5432/postgres)
+2. Настроить таблицы
